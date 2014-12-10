@@ -8,14 +8,15 @@ var Stack = function(){
   var counter = 0;
 
   // Implement the methods below
+  
+  // Add value to top of stack
   someInstance.push = function(value){
-    // Add value to top of stack
     counter++;
     storage[counter] = value;
   };
 
   someInstance.pop = function(){
-    var poppedValue = storage[counter];    
+    var result = storage[counter];    
 
     if (counter <= 0) {
       counter = 0;
@@ -27,12 +28,12 @@ var Stack = function(){
       counter--;
 
       // Return value at top of the stack
-      return poppedValue;  
+      return result;  
     }
   };
 
+  // Return the number of items on the stack
   someInstance.size = function(){
-    // Return the number of items on the stack
     return counter;
   };
 
