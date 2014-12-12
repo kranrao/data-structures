@@ -4,12 +4,53 @@ var LinkedList = function(){
   list.tail = null;
 
   list.addToTail = function(value){
+    var newNode = Node(value);
+
+    // if no tail, set tail and head to the new node
+    if (list.tail === null) {
+      list.tail = newNode;
+      list.head = newNode;  
+    } else {
+      // old tail links to the new tail
+      list.tail.next = newNode;
+      list.tail = newNode;
+    }
+
   };
 
   list.removeHead = function(){
+    // stores value of current head
+    var oldHead = list.head.value;
+
+    // list.head = null -> list.head = null, list.head.next = null -> list.head = null, else overwrite current head with next node
+    if (!list.head) {
+      list.head = null;
+    } else if (!list.head.next) {
+      list.head = null;
+    } else {
+      list.head = list.head.next;
+    }
+    
+    return oldHead;
   };
 
   list.contains = function(target){
+    var hasTarget = false;
+
+    // created an inner function to handle recursion.  How to handle without?
+    var checkNodes = function(node) {
+      for (var key in node) {
+        if (node.value === target) {
+          hasTarget = true;
+        } else {
+          checkNodes(node.next);
+        }
+      }
+    };
+
+    checkNodes(list.head);
+
+    return hasTarget;
   };
 
   return list;
