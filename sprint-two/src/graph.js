@@ -30,6 +30,18 @@ Graph.prototype.removeNode = function(node){
 };
 
 Graph.prototype.hasEdge = function(fromNode, toNode){
+  // set up a flag that indicates whether an edge between nodes exists
+  var hasEdge = false;
+  // check to see if the edge property in fromNode contains
+  // the property toNode
+  for (var key in this.storage[fromNode].edges) {
+    if(key === toNode) {
+      hasEdge = true;
+    }
+  }
+
+  // return the value of flag
+  return hasEdge;
 
 };
 
@@ -39,7 +51,7 @@ Graph.prototype.addEdge = function(fromNode, toNode){
   // with the key/value of toNode
   this.storage[fromNode].edges[toNode]= toNode;
   // repeat on toNode
-  this.storage[toNode].edges[fromNode] = fromNode
+  this.storage[toNode].edges[fromNode] = fromNode;
 };
 
 Graph.prototype.removeEdge = function(fromNode, toNode){
