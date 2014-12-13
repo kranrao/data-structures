@@ -1,9 +1,11 @@
 
 
 var Graph = function(){
+  this.storage = {};
 };
 
 Graph.prototype.addNode = function(node){
+  this.storage[node] = {edges : {}}
 };
 
 Graph.prototype.contains = function(node){
@@ -27,6 +29,3 @@ Graph.prototype.forEachNode = function(cb){
 /*
  * Complexity: What is the time complexity of the above functions?
  */
-
-
-
