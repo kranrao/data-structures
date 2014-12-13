@@ -9,7 +9,7 @@ var LinkedList = function(){
     // if no tail, set tail and head to the new node
     if (list.tail === null) {
       list.tail = newNode;
-      list.head = newNode;  
+      list.head = newNode;
     } else {
       // old tail links to the new tail
       list.tail.next = newNode;
@@ -30,14 +30,14 @@ var LinkedList = function(){
     } else {
       list.head = list.head.next;
     }
-    
+
     return oldHead;
   };
 
   list.contains = function(target){
     var hasTarget = false;
 
-    // created an inner function to handle recursion.  How to handle without?
+    // subroutines are okay - quite common and clearer
     var checkNodes = function(node) {
       for (var key in node) {
         if (node.value === target) {
