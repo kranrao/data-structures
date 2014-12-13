@@ -3,19 +3,20 @@ var HashTable = function(){
   this._storage = LimitedArray(this._limit);
 };
 
-// created new subhashtables for bucket and tuple in order
-// to use get, set, and each methods
 HashTable.prototype.insert = function(k, v){
   var i = getIndexBelowMaxForKey(k, this._limit);
 
   // check if bucket exists, if not create a new bucket
   var bucket = this._storage.get(i) || [];
+
+  // new key / value pair
   var tuple = [k, v];
   var wasUpdated = false;
 
-  for (var i = 0; i < bucket.length; i++) {
-    if (bucket[i][0] === k) {
-      bucket[i][1] = v;
+  // check if key exists, if so update value
+  for (var j = 0; j < bucket.length; j++) {
+    if (bucket[j][0] === k) {
+      bucket[j][1] = v;
       wasUpdated = true;
     }
   }
@@ -24,6 +25,7 @@ HashTable.prototype.insert = function(k, v){
   if (!wasUpdated) {
     bucket.push(tuple)
   }
+
   this._storage.set(i, bucket);
 
 };
@@ -31,10 +33,10 @@ HashTable.prototype.insert = function(k, v){
 HashTable.prototype.retrieve = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
   var bucket = this._storage.get(i) || [];
-  for (var i = 0; i < bucket.length; i++) {
 
-    if (bucket[i][0] === k) {
-      return bucket[i][1];
+  for (var j = 0; j < bucket.length; j++) {
+    if (bucket[j][0] === k) {
+      return bucket[j][1];
     }
   }
 
@@ -42,8 +44,14 @@ HashTable.prototype.retrieve = function(k){
 
 HashTable.prototype.remove = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
+  var bucket = this._storage.get(i) || [];
 
-  this._storage.set(i, null);
+  for (var j = 0; j < bucket.length; j++) {
+    if (bucket[j][0] === k) {
+      bucket[j][1] = null;
+    }
+  }
+
 };
 
 
@@ -51,26 +59,3 @@ HashTable.prototype.remove = function(k){
 /*
  * Complexity: What is the time complexity of the above functions?
  */
-
-  /*// create new hashtable bucketHash
-  this.bucketHash = new HashTable ();
-  // create bucket property on bucketHash._storage
-  // bucket property is an array
-  this.bucketHash._storage.bucket = []
-  // bucket property index randomized by key
-
-  // create new hashtable tupleHash
-  var tupleHash = new HashTable ();
-  this.bucketHash._storage.bucket[i] = tupleHash;
-  // create tuple property on tupleHash._storage
-  // tuple property is an array
-  // array [key, value]
-  tupleHash._storage.tuples = [];
-  tupleHash._storage.tuples[j] = [k, v];
-
-
-  // tuple property index randomized by value
-  console.log(this.bucketHash._storage.bucket[i]._storage.tuples[j][1]);*/
-
-
-  /*return this.bucketHash._storage.bucket[i]._storage.tuples[j][1];*/
