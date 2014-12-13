@@ -7,6 +7,7 @@ var HashTable = function(){
 // to use get, set, and each methods
 HashTable.prototype.insert = function(k, v){
   var i = getIndexBelowMaxForKey(k, this._limit);
+  // var j = getIndexBelowMaxForKey(v, this._limit);
 
   // create new hashtable bucketHash
   this.bucketHash = new HashTable ();
@@ -34,7 +35,9 @@ HashTable.prototype.retrieve = function(k){
 };
 
 HashTable.prototype.remove = function(k){
+  var i = getIndexBelowMaxForKey(k, this._limit);
 
+  this.bucketHash._storage.bucket[i]._storage[1] = null;
 };
 
 
