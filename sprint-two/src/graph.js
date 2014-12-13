@@ -19,7 +19,14 @@ Graph.prototype.contains = function(node){
 };
 
 Graph.prototype.removeNode = function(node){
-
+  // iterate through storage object
+  // check to see if the passed in node mataches any key on storage object
+  for(var key in this.storage) {
+  // if it matches, delete that node in storage
+    if(key === node) {
+      delete this.storage[key];
+    }
+  }
 };
 
 Graph.prototype.hasEdge = function(fromNode, toNode){
