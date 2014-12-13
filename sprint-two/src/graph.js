@@ -9,9 +9,17 @@ Graph.prototype.addNode = function(node){
 };
 
 Graph.prototype.contains = function(node){
+  var hasNode = false;
+  for(var key in this.storage){
+    if(key === node){
+      hasNode = true;
+    }
+  }
+  return hasNode;
 };
 
 Graph.prototype.removeNode = function(node){
+
 };
 
 Graph.prototype.hasEdge = function(fromNode, toNode){
