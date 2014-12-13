@@ -7,29 +7,36 @@ var HashTable = function(){
 // to use get, set, and each methods
 HashTable.prototype.insert = function(k, v){
   var i = getIndexBelowMaxForKey(k, this._limit);
-  var bucket = [];
+
+  // check if bucket exists, if not create a new bucket
+  var bucket = this._storage.get(i) || [];
   var tuple = [k, v];
+  var wasUpdated = false;
 
-  bucket.push(tuple)
+  for (var i = 0; i < bucket.length; i++) {
+    if (bucket[i][0] === k) {
+      bucket[i][1] = v;
+      wasUpdated = true;
+    }
+  }
+
+  // if key not found, create new tuple in bucket
+  if (!wasUpdated) {
+    bucket.push(tuple)
+  }
   this._storage.set(i, bucket);
-
-  // use each to find key / value pair
 
 };
 
 HashTable.prototype.retrieve = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
-  var bucket = this._storage.get(i);
+  var bucket = this._storage.get(i) || [];
+  for (var i = 0; i < bucket.length; i++) {
 
-  this._storage.each(function(bucket){
-    /*console.log(bucket)
-    if(k === bucket[i][0]){
-      return bucket[i][1]
-    }*/
-
-  })
-
-
+    if (bucket[i][0] === k) {
+      return bucket[i][1];
+    }
+  }
 
 };
 
