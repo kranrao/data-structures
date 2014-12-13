@@ -30,9 +30,16 @@ Graph.prototype.removeNode = function(node){
 };
 
 Graph.prototype.hasEdge = function(fromNode, toNode){
+
 };
 
 Graph.prototype.addEdge = function(fromNode, toNode){
+  // target the edge property on fromNode
+  // set a property within that edge property
+  // with the key/value of toNode
+  this.storage[fromNode].edges[toNode]= toNode;
+  // repeat on toNode
+  this.storage[toNode].edges[fromNode] = fromNode
 };
 
 Graph.prototype.removeEdge = function(fromNode, toNode){
