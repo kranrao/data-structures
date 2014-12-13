@@ -7,9 +7,45 @@ var HashTable = function(){
 // to use get, set, and each methods
 HashTable.prototype.insert = function(k, v){
   var i = getIndexBelowMaxForKey(k, this._limit);
-  var j = getIndexBelowMaxForKey(v, this._limit);
+  var bucket = [];
+  var tuple = [k, v];
 
-  // create new hashtable bucketHash
+  bucket.push(tuple)
+  this._storage.set(i, bucket);
+
+  // use each to find key / value pair
+
+};
+
+HashTable.prototype.retrieve = function(k){
+  var i = getIndexBelowMaxForKey(k, this._limit);
+  var bucket = this._storage.get(i);
+
+  this._storage.each(function(bucket){
+    /*console.log(bucket)
+    if(k === bucket[i][0]){
+      return bucket[i][1]
+    }*/
+
+  })
+
+
+
+};
+
+HashTable.prototype.remove = function(k){
+  var i = getIndexBelowMaxForKey(k, this._limit);
+
+  this._storage.set(i, null);
+};
+
+
+
+/*
+ * Complexity: What is the time complexity of the above functions?
+ */
+
+  /*// create new hashtable bucketHash
   this.bucketHash = new HashTable ();
   // create bucket property on bucketHash._storage
   // bucket property is an array
@@ -27,24 +63,7 @@ HashTable.prototype.insert = function(k, v){
 
 
   // tuple property index randomized by value
-  console.log(this.bucketHash._storage.bucket[i]._storage.tuples[j][1]);
-};
-
-HashTable.prototype.retrieve = function(k){
-  var i = getIndexBelowMaxForKey(k, this._limit);
-
-  // did not use get
-  return this.bucketHash._storage.bucket[i]._storage.tuples[j][1];
-};
-
-HashTable.prototype.remove = function(k){
-  var i = getIndexBelowMaxForKey(k, this._limit);
-
-  this.bucketHash._storage.bucket[i]._storage[1] = null;
-};
+  console.log(this.bucketHash._storage.bucket[i]._storage.tuples[j][1]);*/
 
 
-
-/*
- * Complexity: What is the time complexity of the above functions?
- */
+  /*return this.bucketHash._storage.bucket[i]._storage.tuples[j][1];*/
