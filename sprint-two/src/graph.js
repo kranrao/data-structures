@@ -27,6 +27,7 @@ Graph.prototype.removeNode = function(node){
       delete this.storage[key];
     }
   }
+  // in this scenario, we remove a node, but edges point to it remain
 };
 
 Graph.prototype.hasEdge = function(fromNode, toNode){
@@ -42,7 +43,6 @@ Graph.prototype.hasEdge = function(fromNode, toNode){
 
   // return the value of flag
   return hasEdge;
-
 };
 
 Graph.prototype.addEdge = function(fromNode, toNode){
@@ -58,6 +58,9 @@ Graph.prototype.removeEdge = function(fromNode, toNode){
 };
 
 Graph.prototype.forEachNode = function(cb){
+  for(var key in this.storage){
+    cb(key)
+  }
 };
 
 /*
