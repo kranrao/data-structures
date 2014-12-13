@@ -7,7 +7,7 @@ var HashTable = function(){
 // to use get, set, and each methods
 HashTable.prototype.insert = function(k, v){
   var i = getIndexBelowMaxForKey(k, this._limit);
-  // var j = getIndexBelowMaxForKey(v, this._limit);
+  var j = getIndexBelowMaxForKey(v, this._limit);
 
   // create new hashtable bucketHash
   this.bucketHash = new HashTable ();
@@ -22,16 +22,19 @@ HashTable.prototype.insert = function(k, v){
   // create tuple property on tupleHash._storage
   // tuple property is an array
   // array [key, value]
-  tupleHash._storage = [k, v];
-  // tuple property index randomized by value
+  tupleHash._storage.tuples = [];
+  tupleHash._storage.tuples[j] = [k, v];
 
+
+  // tuple property index randomized by value
+  console.log(this.bucketHash._storage.bucket[i]._storage.tuples[j][1]);
 };
 
 HashTable.prototype.retrieve = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
 
   // did not use get
-  return this.bucketHash._storage.bucket[i]._storage[1];
+  return this.bucketHash._storage.bucket[i]._storage.tuples[j][1];
 };
 
 HashTable.prototype.remove = function(k){
