@@ -66,8 +66,21 @@ var methods = {
     return hasValue;
   },
   depthFirstLog : function(cb) {
+    var applyToTrees = function(tree) {
+      cb(tree.value);
 
+      if(tree.left !== null) {
+        applyToTrees(tree.left);
+      }
+
+      if(tree.right !== null) {
+        applyToTrees(tree.right);
+      }
+
+    }
+    applyToTrees(this);
   }
+
 };
 
 /*
